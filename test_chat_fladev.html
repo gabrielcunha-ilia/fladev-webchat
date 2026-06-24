@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Chat — Flamengo DEV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+            background-color: #cc0000;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        p {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+        .badge {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 4px 12px;
+            background: #000;
+            border-radius: 20px;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔴⚫ Flamengo — Teste de Chat</h1>
+        <p>Ambiente: <strong>FLADEV (Sandbox)</strong></p>
+        <p>Clique no ícone de chat no canto inferior direito para iniciar.</p>
+        <span class="badge">DEV</span>
+    </div>
+
+    <script type='text/javascript'>
+        function initEmbeddedMessaging() {
+            try {
+                embeddedservice_bootstrap.settings.language = 'pt-BR';
+                embeddedservice_bootstrap.init(
+                    '00DHZ000009ehHB',
+                    'Portal_Nacao_Web_Chat',
+                    'https://nacao--fladev.sandbox.my.site.com/ESWPortalNacaoWebChat1781200960185',
+                    {
+                        scrt2URL: 'https://nacao--fladev.sandbox.my.salesforce-scrt.com'
+                    }
+                );
+            } catch (err) {
+                console.error('Error loading Embedded Messaging: ', err);
+            }
+        }
+    </script>
+    <script
+        type='text/javascript'
+        src='https://nacao--fladev.sandbox.my.site.com/ESWPortalNacaoWebChat1781200960185/assets/js/bootstrap.min.js'
+        onload='initEmbeddedMessaging()'>
+    </script>
+</body>
+</html>
