@@ -1,76 +1,116 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste Chat — Flamengo DEV</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            text-align: center;
-            padding: 40px;
-            background-color: #cc0000;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-        p {
-            font-size: 14px;
-            opacity: 0.85;
-        }
-        .badge {
-            display: inline-block;
-            margin-top: 16px;
-            padding: 4px 12px;
-            background: #000;
-            border-radius: 20px;
-            font-size: 12px;
-            letter-spacing: 1px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flamengo — Chat Sandbox</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0d0d0d;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .badge {
+      background: #e8001c;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+    h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
+    p { color: #888; font-size: 14px; margin-bottom: 40px; }
+    .card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 32px;
+      width: 420px;
+    }
+    .card h2 {
+      font-size: 13px;
+      font-weight: 600;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #2a2a2a;
+      font-size: 13px;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-row .label { color: #666; }
+    .info-row .value { color: #fff; font-weight: 500; font-family: monospace; font-size: 12px; }
+    .status { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: #22c55e; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .hint { margin-top: 24px; font-size: 12px; color: #555; text-align: center; }
+    .hint span { color: #e8001c; font-weight: 600; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🔴⚫ Flamengo — Teste de Chat</h1>
-        <p>Ambiente: <strong>FLADEV (Sandbox)</strong></p>
-        <p>Clique no ícone de chat no canto inferior direito para iniciar.</p>
-        <span class="badge">DEV</span>
-    </div>
 
-    <script type='text/javascript'>
-        function initEmbeddedMessaging() {
-            try {
-                embeddedservice_bootstrap.settings.language = 'pt-BR';
-                embeddedservice_bootstrap.init(
-                    '00DHZ000009ehHB',
-                    'Portal_Nacao_Web_Chat',
-                    'https://nacao--fladev.sandbox.my.site.com/ESWPortalNacaoWebChat1781200960185',
-                    {
-                        scrt2URL: 'https://nacao--fladev.sandbox.my.salesforce-scrt.com'
-                    }
-                );
-            } catch (err) {
-                console.error('Error loading Embedded Messaging: ', err);
-            }
-        }
-    </script>
-    <script
-        type='text/javascript'
-        src='https://nacao--fladev.sandbox.my.site.com/ESWPortalNacaoWebChat1781200960185/assets/js/bootstrap.min.js'
-        onload='initEmbeddedMessaging()'>
-    </script>
+  <div class="badge">Ambiente de Testes — Sandbox</div>
+  <h1>🔴⚫ Portal Nação Web Chat</h1>
+  <p>Página de teste para geração de MessagingSession na FLADEV</p>
+
+  <div class="card">
+    <h2>Configuração do Canal</h2>
+    <div class="info-row">
+      <span class="label">Deployment</span>
+      <span class="value">ChatTestGithub</span>
+    </div>
+    <div class="info-row">
+      <span class="label">Org ID</span>
+      <span class="value">00DHZ000009ehHB</span>
+    </div>
+    <div class="info-row">
+      <span class="label">Ambiente</span>
+      <span class="value">FLADEV (Sandbox)</span>
+    </div>
+    <div class="info-row">
+      <span class="label">Status</span>
+      <span class="status"><span class="dot"></span>Aguardando chat</span>
+    </div>
+  </div>
+
+  <p class="hint">O ícone do chat aparece no canto <span>inferior direito</span> ↘</p>
+
+  <script type='text/javascript'>
+    function initEmbeddedMessaging() {
+      try {
+        embeddedservice_bootstrap.settings.language = 'en_US';
+        embeddedservice_bootstrap.init(
+          '00DHZ000009ehHB',
+          'ChatTestGithub',
+          'https://nacao--fladev.sandbox.my.site.com/ESWChatTestGithub1782350236394',
+          {
+            scrt2URL: 'https://nacao--fladev.sandbox.my.salesforce-scrt.com'
+          }
+        );
+      } catch (err) {
+        console.error('Error loading Embedded Messaging: ', err);
+      }
+    }
+  </script>
+  <script type='text/javascript'
+    src='https://nacao--fladev.sandbox.my.site.com/ESWChatTestGithub1782350236394/assets/js/bootstrap.min.js'
+    onload='initEmbeddedMessaging()'>
+  </script>
+
 </body>
 </html>
