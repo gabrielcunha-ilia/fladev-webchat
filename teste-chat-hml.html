@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teste Chat — Flamengo HML</title>
-
-    <!-- Preload do bootstrap para iniciar o download o mais cedo possível -->
     <link rel="preload"
           href="https://nacao--hml.sandbox.my.site.com/ESWWebChatGitHub1782823545723/assets/js/bootstrap.min.js"
           as="script">
-
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -50,6 +47,11 @@
     </div>
 
     <script type='text/javascript'>
+        // Aguarda o widget estar 100% pronto antes de abrir
+        window.addEventListener('onEmbeddedMessagingReady', function() {
+            embeddedservice_bootstrap.utilAPI.launchChat();
+        });
+
         function initEmbeddedMessaging() {
             try {
                 embeddedservice_bootstrap.settings.language = 'pt-BR';
@@ -61,15 +63,12 @@
                         scrt2URL: 'https://nacao--hml.sandbox.my.salesforce-scrt.com'
                     }
                 );
-                // Abre o chat automaticamente após inicializar
-                embeddedservice_bootstrap.utilAPI.launchChat();
             } catch (err) {
                 console.error('Error loading Embedded Messaging: ', err);
             }
         }
     </script>
 
-    <!-- Script carregado com fetchpriority=high para priorizar no browser -->
     <script
         type='text/javascript'
         fetchpriority='high'
