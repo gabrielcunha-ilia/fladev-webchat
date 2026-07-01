@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flamengo — Chat Sandbox</title>
+  <link rel="preload"
+        href="https://nacao--devflagfnc.sandbox.my.site.com/ESWGitHubFlaDevGFNC1782351378447/assets/js/bootstrap.min.js"
+        as="script">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -33,11 +36,9 @@
   </style>
 </head>
 <body>
-
   <div class="badge">Ambiente de Testes — Sandbox Pessoal</div>
   <h1>🔴⚫ Portal Nação Web Chat</h1>
   <p>Página de teste para geração de MessagingSession na devflagfnc</p>
-
   <div class="card">
     <h2>Configuração do Canal</h2>
     <div class="info-row">
@@ -57,13 +58,17 @@
       <span class="status"><span class="dot"></span>Aguardando chat</span>
     </div>
   </div>
-
-  <p class="hint">O ícone do chat aparece no canto <span>inferior direito</span> ↘</p>
+  <p class="hint">O chat abrirá automaticamente ↘</p>
 
   <script type='text/javascript'>
+    // Abre o chat automaticamente quando o widget estiver pronto
+    window.addEventListener('onEmbeddedMessagingReady', function() {
+      embeddedservice_bootstrap.utilAPI.launchChat();
+    });
+
     function initEmbeddedMessaging() {
       try {
-        embeddedservice_bootstrap.settings.language = 'en_US';
+        embeddedservice_bootstrap.settings.language = 'pt-BR';
         embeddedservice_bootstrap.init(
           '00DHZ000009fvV1',
           'GitHubFlaDevGFNC',
@@ -77,10 +82,11 @@
       }
     }
   </script>
+
   <script type='text/javascript'
+    fetchpriority='high'
     src='https://nacao--devflagfnc.sandbox.my.site.com/ESWGitHubFlaDevGFNC1782351378447/assets/js/bootstrap.min.js'
     onload='initEmbeddedMessaging()'>
   </script>
-
 </body>
 </html>
