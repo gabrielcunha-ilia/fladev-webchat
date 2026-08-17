@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Chat (ChatDevFla) — Flamengo DEV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+            background-color: #cc0000;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        h1 { font-size: 24px; margin-bottom: 8px; }
+        p  { font-size: 14px; opacity: 0.85; }
+        .badge {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 4px 12px;
+            background: #000;
+            border-radius: 20px;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔴⚫ Flamengo — Teste de Chat</h1>
+        <p>Ambiente: <strong>FLADEV (Sandbox)</strong> · Deployment: <strong>ChatDevFla</strong></p>
+        <p>Clique no ícone de chat no canto inferior direito para iniciar.</p>
+        <span class="badge">DEV</span>
+    </div>
+
+    <!-- =======================================================================
+         CONFIG DO DEPLOYMENT — trocar SOMENTE aqui.
+         DEV_NAME, SITE_URL e BOOTSTRAP_SRC vem do MESMO deployment.
+         ORG_ID e SCRT2_URL sao da org (nao mudam).
+         ======================================================================= -->
+    <script type="text/javascript">
+        var ESW_CONFIG = {
+            ORG_ID:        '00DHZ00000AQlaD',
+            DEV_NAME:      'ChatTestGithub',
+            SITE_URL:      'https://nacao--fladevgc.sandbox.my.site.com/ESWChatFladevgc1786992227963',
+            SCRT2_URL:     'https://nacao--fladevgc.sandbox.my.salesforce-scrt.com',
+            BOOTSTRAP_SRC: 'https://nacao--fladevgc.sandbox.my.site.com/ESWChatFladevgc1786992227963/assets/js/bootstrap.min.js',
+            LANGUAGE:      'pt-BR'
+        };
+
+        function initEmbeddedMessaging() {
+            try {
+                embeddedservice_bootstrap.settings.language = ESW_CONFIG.LANGUAGE;
+                embeddedservice_bootstrap.init(
+                    ESW_CONFIG.ORG_ID,
+                    ESW_CONFIG.DEV_NAME,
+                    ESW_CONFIG.SITE_URL,
+                    { scrt2URL: ESW_CONFIG.SCRT2_URL }
+                );
+            } catch (err) {
+                console.error('Error loading Embedded Messaging: ', err);
+            }
+        }
+
+        (function loadBootstrap() {
+            var s = document.createElement('script');
+            s.type = 'text/javascript';
+            s.src = ESW_CONFIG.BOOTSTRAP_SRC;
+            s.onload = initEmbeddedMessaging;
+            s.onerror = function () { console.error('Falha ao carregar bootstrap.min.js: ', ESW_CONFIG.BOOTSTRAP_SRC); };
+            document.body.appendChild(s);
+        })();
+    </script>
+</body>
+</html>
