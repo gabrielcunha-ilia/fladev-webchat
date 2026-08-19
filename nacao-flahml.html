@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste Chat — Flamengo HML</title>
-    <link rel="preload"
-          href="https://nacao--hml.sandbox.my.site.com/ESWWebChatGitHub1782823545723/assets/js/bootstrap.min.js"
-          as="script">
+    <title>Teste Chat (Chat HML) — Flamengo HML</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: Arial, sans-serif;
             background-color: #1a1a1a;
             color: #ffffff;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
+            margin: 0;
         }
         .container {
             text-align: center;
@@ -26,7 +24,7 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
         h1 { font-size: 24px; margin-bottom: 8px; }
-        p { font-size: 14px; opacity: 0.85; margin-top: 6px; }
+        p  { font-size: 14px; opacity: 0.85; }
         .badge {
             display: inline-block;
             margin-top: 16px;
@@ -41,39 +39,48 @@
 <body>
     <div class="container">
         <h1>🔴⚫ Flamengo — Teste de Chat</h1>
-        <p>Ambiente: <strong>FLAHML (Homologação)</strong></p>
-        <p>O chat será aberto automaticamente.</p>
-        <span class="badge">HML</span>
+        <p>Ambiente: <strong>FLAHML (Sandbox)</strong> · Deployment: <strong>Chat_Github</strong></p>
+        <p>Clique no ícone de chat no canto inferior direito para iniciar.</p>
+        <span class="badge">DEV</span>
     </div>
 
-    <script type='text/javascript'>
-        // Aguarda o widget estar 100% pronto antes de abrir
-        window.addEventListener('onEmbeddedMessagingReady', function() {
-            embeddedservice_bootstrap.utilAPI.launchChat();
-        });
+    <!-- =======================================================================
+         CONFIG DO DEPLOYMENT — trocar SOMENTE aqui.
+         DEV_NAME, SITE_URL e BOOTSTRAP_SRC vem do MESMO deployment.
+         ORG_ID e SCRT2_URL sao da org (nao mudam).
+         ======================================================================= -->
+    <script type="text/javascript">
+        var ESW_CONFIG = {
+            ORG_ID:        '00DHZ00000AQe7K',
+            DEV_NAME:      'Chat_Github',
+            SITE_URL:      'https://nacao--hml.sandbox.my.site.com/ESWChatGithub1787163989545',
+            SCRT2_URL:     'https://nacao--hml.sandbox.my.salesforce-scrt.com',
+            BOOTSTRAP_SRC: 'https://nacao--hml.sandbox.my.site.com/ESWChatGithub1787163989545/assets/js/bootstrap.min.js',
+            LANGUAGE:      'pt-BR'
+        };
 
         function initEmbeddedMessaging() {
             try {
-                embeddedservice_bootstrap.settings.language = 'pt-BR';
+                embeddedservice_bootstrap.settings.language = ESW_CONFIG.LANGUAGE;
                 embeddedservice_bootstrap.init(
-                    '00DHZ000009eb0T',
-                    'Web_Chat_Git_Hub',
-                    'https://nacao--hml.sandbox.my.site.com/ESWWebChatGitHub1782823545723',
-                    {
-                        scrt2URL: 'https://nacao--hml.sandbox.my.salesforce-scrt.com'
-                    }
+                    ESW_CONFIG.ORG_ID,
+                    ESW_CONFIG.DEV_NAME,
+                    ESW_CONFIG.SITE_URL,
+                    { scrt2URL: ESW_CONFIG.SCRT2_URL }
                 );
             } catch (err) {
                 console.error('Error loading Embedded Messaging: ', err);
             }
         }
-    </script>
 
-    <script
-        type='text/javascript'
-        fetchpriority='high'
-        src='https://nacao--hml.sandbox.my.site.com/ESWWebChatGitHub1782823545723/assets/js/bootstrap.min.js'
-        onload='initEmbeddedMessaging()'>
+        (function loadBootstrap() {
+            var s = document.createElement('script');
+            s.type = 'text/javascript';
+            s.src = ESW_CONFIG.BOOTSTRAP_SRC;
+            s.onload = initEmbeddedMessaging;
+            s.onerror = function () { console.error('Falha ao carregar bootstrap.min.js: ', ESW_CONFIG.BOOTSTRAP_SRC); };
+            document.body.appendChild(s);
+        })();
     </script>
 </body>
 </html>
